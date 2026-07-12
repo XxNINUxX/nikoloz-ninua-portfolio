@@ -45,21 +45,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-60px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.6); }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
         .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
@@ -255,148 +240,154 @@
             transform: translateY(-4px);
         }
         
-        /* Sections */
-        section {
+        /* Game Section Styles */
+        .game-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .game-section.catsmith::before {
+            background: linear-gradient(135deg, #c9451f 0%, #8b3a14 100%);
+        }
+        
+        .game-section.nana::before {
+            background: linear-gradient(135deg, #f7d000 0%, #ffab00 100%);
+        }
+        
+        .game-section.bee::before {
+            background: linear-gradient(135deg, #2d5016 0%, #1a3d09 100%);
+        }
+        
+        .game-content {
+            max-width: 1100px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .game-info h2 {
+            margin-bottom: 1.5rem;
+            font-size: 3rem;
+        }
+        
+        .game-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .meta-tag {
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .game-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 550px;
+        }
+        
+        .game-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .highlight {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .highlight-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        
+        .highlight-text {
+            flex: 1;
+        }
+        
+        .highlight-text strong {
+            display: block;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+        
+        .highlight-text p {
+            font-size: 0.95rem;
+        }
+        
+        .game-cta {
+            margin-top: 2.5rem;
+        }
+        
+        .game-visual {
+            position: relative;
+            height: 450px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-visual-placeholder {
+            text-align: center;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+        
+        .game-visual-placeholder h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* QA Section */
+        section#qa {
             padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        section > h2 {
-            margin-bottom: 1rem;
-        }
-        
-        .section-label {
-            color: var(--accent-primary);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .section-description {
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-        
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .project-card {
-            position: relative;
-            aspect-ratio: 3/4;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid var(--border-color);
-            cursor: pointer;
-            group;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
-        }
-        
-        .project-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-12px);
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2);
-        }
-        
-        .project-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .project-card:hover .project-image {
-            transform: scale(1.08);
-        }
-        
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.7) 50%, transparent 100%);
-            transition: background 0.5s ease;
-            z-index: 2;
-        }
-        
-        .project-card:hover .project-overlay {
-            background: linear-gradient(to top, rgba(10, 14, 39, 1) 0%, rgba(10, 14, 39, 0.85) 40%, transparent 100%);
-        }
-        
-        .project-content {
-            position: relative;
-            z-index: 3;
-            padding: 2rem;
-        }
-        
-        .project-tag {
-            display: inline-block;
-            background: rgba(255, 107, 53, 0.15);
-            border: 1px solid var(--accent-primary);
-            color: var(--accent-primary);
-            padding: 0.4rem 0.9rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .project-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .project-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            max-height: 100px;
-            overflow: hidden;
-        }
-        
-        .project-skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-        
-        .skill-tag {
-            background: rgba(0, 78, 137, 0.2);
-            border: 1px solid var(--accent-secondary);
-            color: var(--accent-secondary);
-            padding: 0.3rem 0.7rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .project-card:nth-child(3) {
-            grid-column: 1 / -1;
-        }
-        
-        .project-card:nth-child(3) {
-            aspect-ratio: auto;
-            min-height: 300px;
-        }
-        
-        /* QA Section */
         .qa-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -453,7 +444,10 @@
         }
         
         /* Contact Section */
-        .contact-container {
+        section#contact {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
         
@@ -487,16 +481,51 @@
             margin: 0.5rem 0;
         }
         
+        /* Sections */
+        section {
+            position: relative;
+        }
+        
+        .section-label {
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
         /* Responsive */
+        @media (max-width: 968px) {
+            .game-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .game-visual {
+                height: 300px;
+                order: -1;
+            }
+            
+            .qa-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-info h2 {
+                font-size: 2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             nav { display: none; }
-            .qa-container { grid-template-columns: 1fr; }
-            .project-card:nth-child(3) { grid-column: 1; }
             .hero-ctas { flex-direction: column; }
             .primary-btn, .secondary-btn { width: 100%; }
             section { padding: 4rem 1.5rem; }
             h1 { font-size: 2.5rem; }
             h2 { font-size: 1.8rem; }
+            .game-section { padding: 3rem 1.5rem; }
+            .game-meta { flex-direction: column; align-items: flex-start; }
         }
         
         /* Links */
@@ -513,7 +542,9 @@
         <div class="header-content">
             <div class="logo">NINUA</div>
             <nav>
-                <a href="#projects">Projects</a>
+                <a href="#catsmith">Catsmith</a>
+                <a href="#nana">Nana</a>
+                <a href="#bee">To Bee</a>
                 <a href="#qa">QA Testing</a>
                 <a href="#contact">Contact</a>
             </nav>
@@ -531,66 +562,159 @@
             <h1 class="hero-title animate-fade-in delay-1">Game Designer & Audio Specialist</h1>
             <p class="hero-description animate-fade-in delay-2">I build tight gameplay systems, craft immersive soundscapes, and break games to make them better. FutureGames graduate with a passion for elegant design.</p>
             <div class="hero-ctas animate-fade-in delay-3">
-                <a href="#projects" class="primary-btn">View My Work ↓</a>
+                <a href="#catsmith" class="primary-btn">View My Work ↓</a>
                 <a href="https://www.linkedin.com/in/nikoloz-ninua-a8406b2bb/" target="_blank" class="secondary-btn">LinkedIn →</a>
             </div>
         </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects">
-        <span class="section-label">Design & Systems</span>
-        <h2>Featured Projects</h2>
-        <p class="section-description">FutureGames study projects where I led system design, mechanics, and architecture across 3-7 week sprints.</p>
-        
-        <div class="projects-grid">
-            <!-- Catsmith -->
-            <a href="https://futuregames.itch.io/catsmith" target="_blank" class="project-card">
-                <img src="https://img.itch.zone/aW1nLzExNjE5NTM4LnBuZw==/315x250%23c/lqwNjG.png" alt="Catsmith" class="project-image">
-                <div class="project-overlay"></div>
-                <div class="project-content">
-                    <span class="project-tag">Unreal • 7 Weeks</span>
-                    <h3 class="project-title">Catsmith</h3>
-                    <p class="project-description">Architected the weapon creation pipeline and core minigames that drive the gameplay loop. Responsible for the majority of underlying systems.</p>
-                    <div class="project-skills">
-                        <span class="skill-tag">Systems Design</span>
-                        <span class="skill-tag">Minigames</span>
-                        <span class="skill-tag">FMOD</span>
+    <!-- Catsmith -->
+    <section id="catsmith" class="game-section catsmith">
+        <div class="game-content">
+            <div class="game-info">
+                <h2>Catsmith</h2>
+                <div class="game-meta">
+                    <span class="meta-tag">Unreal Engine</span>
+                    <span class="meta-tag">7 Weeks</span>
+                    <span class="meta-tag">Co-op</span>
+                </div>
+                <p class="game-description">A local co-op crafting game where two cat apprentices work together under Master Kitshu, a legendary blacksmith. Manage the forge, fulfill commissions, and master the art of weapon creation through perfectly-tuned minigames.</p>
+                
+                <div class="game-highlights">
+                    <div class="highlight">
+                        <div class="highlight-icon">⚙</div>
+                        <div class="highlight-text">
+                            <strong>Pipeline Architecture</strong>
+                            <p>Architected the entire weapon creation system and pipeline, ensuring smooth workflow from ideation to implementation.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🎮</div>
+                        <div class="highlight-text">
+                            <strong>Core Minigames</strong>
+                            <p>Designed and tuned the minigames that drive the gameplay loop, creating engaging challenge moments.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🔊</div>
+                        <div class="highlight-text">
+                            <strong>FMOD Integration</strong>
+                            <p>Integrated dynamic audio systems to complement the crafting experience with responsive sound design.</p>
+                        </div>
                     </div>
                 </div>
-            </a>
+                
+                <div class="game-cta">
+                    <a href="https://futuregames.itch.io/catsmith" target="_blank" class="primary-btn">Play on itch.io →</a>
+                </div>
+            </div>
+            
+            <div class="game-visual">
+                <div class="game-visual-placeholder">
+                    <h3>🐱 Catsmith</h3>
+                    <p>Co-op Crafting Adventure</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Nana -->
-            <a href="https://futuregames.itch.io/nanaintothebanana" target="_blank" class="project-card">
-                <img src="https://img.itch.zone/aW1nLzk3MzI4MDcucG5n/315x250%23c/w6%2FG9j.png" alt="Nana Into The Banana" class="project-image">
-                <div class="project-overlay"></div>
-                <div class="project-content">
-                    <span class="project-tag">Unity • 4 Weeks</span>
-                    <h3 class="project-title">Nana Into The Banana</h3>
-                    <p class="project-description">Designed combat mechanics and upgrades. Solved a major UX challenge by mapping complex movement inputs to a single mobile touch button.</p>
-                    <div class="project-skills">
-                        <span class="skill-tag">Combat Mechanics</span>
-                        <span class="skill-tag">Mobile UX</span>
-                        <span class="skill-tag">Co-Composer</span>
+    <!-- Nana Into The Banana -->
+    <section id="nana" class="game-section nana">
+        <div class="game-content">
+            <div class="game-visual">
+                <div class="game-visual-placeholder">
+                    <h3>🍌 Nana</h3>
+                    <p>Fast-Paced Combat</p>
+                </div>
+            </div>
+            
+            <div class="game-info">
+                <h2>Nana Into The Banana</h2>
+                <div class="game-meta">
+                    <span class="meta-tag">Unity</span>
+                    <span class="meta-tag">4 Weeks</span>
+                    <span class="meta-tag">Mobile</span>
+                </div>
+                <p class="game-description">A chaotic, skill-based mobile game bursting with bright yellow insanity. Navigate fast-paced combat scenarios with innovative mobile controls that map complex input to simple, intuitive touch mechanics.</p>
+                
+                <div class="game-highlights">
+                    <div class="highlight">
+                        <div class="highlight-icon">⚔</div>
+                        <div class="highlight-text">
+                            <strong>Combat Mechanics</strong>
+                            <p>Designed combat systems with careful attention to balance, difficulty curves, and player progression.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">📱</div>
+                        <div class="highlight-text">
+                            <strong>Mobile UX Breakthrough</strong>
+                            <p>Solved a major UX challenge by mapping complex movement inputs to a single touch button without sacrificing depth.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🎵</div>
+                        <div class="highlight-text">
+                            <strong>Co-Composer</strong>
+                            <p>Contributed to the soundtrack design, ensuring audio reinforces the chaotic energy of the gameplay.</p>
+                        </div>
                     </div>
                 </div>
-            </a>
+                
+                <div class="game-cta">
+                    <a href="https://futuregames.itch.io/nanaintothebanana" target="_blank" class="primary-btn">Play on itch.io →</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- To Bee Or Not To Bee (Full Width) -->
-            <a href="https://futuregames.itch.io/to-bee-or-not-to-bee" target="_blank" class="project-card">
-                <img src="https://img.itch.zone/aW1nLzg0NDA5NTAxLnBuZw==/original/AqMnIU.png" alt="To Bee Or Not To Bee" class="project-image">
-                <div class="project-overlay"></div>
-                <div class="project-content">
-                    <span class="project-tag">Unity • 3 Weeks</span>
-                    <h3 class="project-title">To Bee Or Not To Bee</h3>
-                    <p class="project-description">Drove ideation phase. Designed core player movement and enemy behaviors from the ground up. Handled all sound design and music composition for the entire project.</p>
-                    <div class="project-skills">
-                        <span class="skill-tag">Movement Design</span>
-                        <span class="skill-tag">Enemy Design</span>
-                        <span class="skill-tag">Full Audio & SFX</span>
+    <!-- To Bee Or Not To Bee -->
+    <section id="bee" class="game-section bee">
+        <div class="game-content">
+            <div class="game-info">
+                <h2>To Bee Or Not To Bee</h2>
+                <div class="game-meta">
+                    <span class="meta-tag">Unity</span>
+                    <span class="meta-tag">3 Weeks</span>
+                    <span class="meta-tag">Platformer</span>
+                </div>
+                <p class="game-description">Guide the Queen Bee through a world transformed by environmental hazards and pollution. Navigate beautifully crafted levels while managing colony survival in this eco-conscious platformer adventure.</p>
+                
+                <div class="game-highlights">
+                    <div class="highlight">
+                        <div class="highlight-icon">💡</div>
+                        <div class="highlight-text">
+                            <strong>Ideation Leadership</strong>
+                            <p>Actively drove the ideation phase, helping establish the game's core vision and environmental themes.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🎯</div>
+                        <div class="highlight-text">
+                            <strong>Movement & Enemy Design</strong>
+                            <p>Designed core player movement mechanics and enemy behaviors from the ground up for satisfying platforming feel.</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🎼</div>
+                        <div class="highlight-text">
+                            <strong>Full Audio & SFX</strong>
+                            <p>Handled all sound design and music composition for the entire project, creating an immersive sonic environment.</p>
+                        </div>
                     </div>
                 </div>
-            </a>
+                
+                <div class="game-cta">
+                    <a href="https://futuregames.itch.io/to-bee-or-not-to-bee" target="_blank" class="primary-btn">Play on itch.io →</a>
+                </div>
+            </div>
+            
+            <div class="game-visual">
+                <div class="game-visual-placeholder">
+                    <h3>🐝 To Bee</h3>
+                    <p>Eco Platformer Adventure</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -598,10 +722,12 @@
     <section id="qa">
         <span class="section-label">Quality Assurance</span>
         <h2>Breaking Games to Build Them</h2>
+        <div style="margin: 2rem 0 3rem 0;">
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px;">I have a natural aptitude for finding edge cases and pushing systems to their limits. Through my education, I've completed QA testing cycles for multiple titles. I thrive on deliberate chaos—whether pushing engines until they crash or playing absurdly to break game balance.</p>
+        </div>
+        
         <div class="qa-container">
             <div class="qa-content">
-                <p>I have a natural aptitude for finding edge cases and pushing systems to their limits. Through my education, I've completed QA testing cycles for multiple titles. I thrive on deliberate chaos—whether pushing engines until they crash or playing absurdly to break game balance.</p>
-                
                 <div class="qa-features">
                     <div class="qa-feature">
                         <div class="qa-icon">✓</div>
@@ -631,9 +757,9 @@
                 <h4>Edge Case Hunter</h4>
                 <p>"I don't play the game how the designer intended. I play it like a chaotic player will—and I love breaking things in unexpected ways."</p>
                 <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center;">
-                    <span class="skill-tag">Jira</span>
-                    <span class="skill-tag">Bug Reporting</span>
-                    <span class="skill-tag">Regression Testing</span>
+                    <span style="background: rgba(0, 78, 137, 0.2); border: 1px solid var(--accent-secondary); color: var(--accent-secondary); padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Jira</span>
+                    <span style="background: rgba(0, 78, 137, 0.2); border: 1px solid var(--accent-secondary); color: var(--accent-secondary); padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Bug Reporting</span>
+                    <span style="background: rgba(0, 78, 137, 0.2); border: 1px solid var(--accent-secondary); color: var(--accent-secondary); padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Regression Testing</span>
                 </div>
             </div>
         </div>
