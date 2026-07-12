@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikoloz Ninua | Game Designer & Audio Specialist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-dark: #0a0e27;
+            --bg-darker: #050812;
+            --accent-primary: #ff6b35;
+            --accent-secondary: #004e89;
+            --accent-tertiary: #f77f00;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8c8;
+            --border-color: #1a2544;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-tertiary); }
+        
+        /* Typography */
+        h1, h2, h3 { font-weight: 700; letter-spacing: -1px; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; }
+        h3 { font-size: 1.5rem; }
+        
+        p { color: var(--text-secondary); font-size: 1.05rem; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.6); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent-primary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-btn {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-primary);
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .cta-btn:hover {
+            background: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .cta-btn { display: none; }
+            .logo { font-size: 1.4rem; }
+            header { padding: 1rem 1.5rem; }
+        }
+        
+        /* Hero Section */
+        section#hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-label {
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-title {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .primary-btn {
+            background: var(--accent-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .primary-btn:hover {
+            background: transparent;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+        
+        .secondary-btn {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--accent-secondary);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .secondary-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-4px);
+        }
+        
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section > h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .section-label {
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            group;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2);
+        }
+        
+        .project-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.08);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.7) 50%, transparent 100%);
+            transition: background 0.5s ease;
+            z-index: 2;
+        }
+        
+        .project-card:hover .project-overlay {
+            background: linear-gradient(to top, rgba(10, 14, 39, 1) 0%, rgba(10, 14, 39, 0.85) 40%, transparent 100%);
+        }
+        
+        .project-content {
+            position: relative;
+            z-index: 3;
+            padding: 2rem;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-height: 100px;
+            overflow: hidden;
+        }
+        
+        .project-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        
+        .skill-tag {
+            background: rgba(0, 78, 137, 0.2);
+            border: 1px solid var(--accent-secondary);
+            color: var(--accent-secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .project-card:nth-child(3) {
+            grid-column: 1 / -1;
+        }
+        
+        .project-card:nth-child(3) {
+            aspect-ratio: auto;
+            min-height: 300px;
+        }
+        
+        /* QA Section */
+        .qa-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .qa-content h3 {
+            margin: 1rem 0;
+            color: var(--accent-primary);
+        }
+        
+        .qa-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .qa-feature {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .qa-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .qa-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 78, 137, 0.1));
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .qa-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+        
+        .qa-card p {
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            text-align: center;
+        }
+        
+        .contact-container h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+        
+        .contact-ctas {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .qa-container { grid-template-columns: 1fr; }
+            .project-card:nth-child(3) { grid-column: 1; }
+            .hero-ctas { flex-direction: column; }
+            .primary-btn, .secondary-btn { width: 100%; }
+            section { padding: 4rem 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+        }
+        
+        /* Links */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">NINUA</div>
+            <nav>
+                <a href="#projects">Projects</a>
+                <a href="#qa">QA Testing</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#contact" class="cta-btn">Let's Work</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="animate-fade-in">
+                <div class="hero-label">Warsaw, Poland • Open to Remote</div>
+            </div>
+            <h1 class="hero-title animate-fade-in delay-1">Game Designer & Audio Specialist</h1>
+            <p class="hero-description animate-fade-in delay-2">I build tight gameplay systems, craft immersive soundscapes, and break games to make them better. FutureGames graduate with a passion for elegant design.</p>
+            <div class="hero-ctas animate-fade-in delay-3">
+                <a href="#projects" class="primary-btn">View My Work ↓</a>
+                <a href="https://www.linkedin.com/in/nikoloz-ninua-a8406b2bb/" target="_blank" class="secondary-btn">LinkedIn →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <span class="section-label">Design & Systems</span>
+        <h2>Featured Projects</h2>
+        <p class="section-description">FutureGames study projects where I led system design, mechanics, and architecture across 3-7 week sprints.</p>
+        
+        <div class="projects-grid">
+            <!-- Catsmith -->
+            <a href="https://futuregames.itch.io/catsmith" target="_blank" class="project-card">
+                <img src="https://img.itch.zone/aW1nLzExNjE5NTM4LnBuZw==/315x250%23c/lqwNjG.png" alt="Catsmith" class="project-image">
+                <div class="project-overlay"></div>
+                <div class="project-content">
+                    <span class="project-tag">Unreal • 7 Weeks</span>
+                    <h3 class="project-title">Catsmith</h3>
+                    <p class="project-description">Architected the weapon creation pipeline and core minigames that drive the gameplay loop. Responsible for the majority of underlying systems.</p>
+                    <div class="project-skills">
+                        <span class="skill-tag">Systems Design</span>
+                        <span class="skill-tag">Minigames</span>
+                        <span class="skill-tag">FMOD</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Nana -->
+            <a href="https://futuregames.itch.io/nanaintothebanana" target="_blank" class="project-card">
+                <img src="https://img.itch.zone/aW1nLzk3MzI4MDcucG5n/315x250%23c/w6%2FG9j.png" alt="Nana Into The Banana" class="project-image">
+                <div class="project-overlay"></div>
+                <div class="project-content">
+                    <span class="project-tag">Unity • 4 Weeks</span>
+                    <h3 class="project-title">Nana Into The Banana</h3>
+                    <p class="project-description">Designed combat mechanics and upgrades. Solved a major UX challenge by mapping complex movement inputs to a single mobile touch button.</p>
+                    <div class="project-skills">
+                        <span class="skill-tag">Combat Mechanics</span>
+                        <span class="skill-tag">Mobile UX</span>
+                        <span class="skill-tag">Co-Composer</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- To Bee Or Not To Bee (Full Width) -->
+            <a href="https://futuregames.itch.io/to-bee-or-not-to-bee" target="_blank" class="project-card">
+                <img src="https://img.itch.zone/aW1nLzg0NDA5NTAxLnBuZw==/original/AqMnIU.png" alt="To Bee Or Not To Bee" class="project-image">
+                <div class="project-overlay"></div>
+                <div class="project-content">
+                    <span class="project-tag">Unity • 3 Weeks</span>
+                    <h3 class="project-title">To Bee Or Not To Bee</h3>
+                    <p class="project-description">Drove ideation phase. Designed core player movement and enemy behaviors from the ground up. Handled all sound design and music composition for the entire project.</p>
+                    <div class="project-skills">
+                        <span class="skill-tag">Movement Design</span>
+                        <span class="skill-tag">Enemy Design</span>
+                        <span class="skill-tag">Full Audio & SFX</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- QA Testing -->
+    <section id="qa">
+        <span class="section-label">Quality Assurance</span>
+        <h2>Breaking Games to Build Them</h2>
+        <div class="qa-container">
+            <div class="qa-content">
+                <p>I have a natural aptitude for finding edge cases and pushing systems to their limits. Through my education, I've completed QA testing cycles for multiple titles. I thrive on deliberate chaos—whether pushing engines until they crash or playing absurdly to break game balance.</p>
+                
+                <div class="qa-features">
+                    <div class="qa-feature">
+                        <div class="qa-icon">✓</div>
+                        <div>
+                            <h4>Functional & Crash Testing</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Pushing boundaries to find hard breaks and engine limits.</p>
+                        </div>
+                    </div>
+                    <div class="qa-feature">
+                        <div class="qa-icon">✓</div>
+                        <div>
+                            <h4>Balance & Gameplay Testing</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Analyzing mechanics to ensure the intended player experience.</p>
+                        </div>
+                    </div>
+                    <div class="qa-feature">
+                        <div class="qa-icon">✓</div>
+                        <div>
+                            <h4>Industry Standard Pipelines</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Fluent in Jira for ticketing, tracking, and sprint management.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-card">
+                <h4>Edge Case Hunter</h4>
+                <p>"I don't play the game how the designer intended. I play it like a chaotic player will—and I love breaking things in unexpected ways."</p>
+                <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center;">
+                    <span class="skill-tag">Jira</span>
+                    <span class="skill-tag">Bug Reporting</span>
+                    <span class="skill-tag">Regression Testing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact-container">
+            <span class="section-label">Get In Touch</span>
+            <h2>Let's Create Something Great</h2>
+            <p class="contact-description">I'm actively looking for roles in Game Design, Audio Design, or QA Testing. Whether full-time, contract, or a one-off project—let's talk.</p>
+            <div class="contact-ctas">
+                <a href="mailto:Nikoloz.ninua.26@gmail.com" class="primary-btn">📧 Email Me</a>
+                <a href="https://www.linkedin.com/in/nikoloz-ninua-a8406b2bb/" target="_blank" class="secondary-btn">💼 LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Nikoloz Ninua. All rights reserved.</p>
+        <p>Built with passion, code, and an obsession for game feel.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            if (section.id !== 'hero') {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'all 0.8s ease-out';
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>
